@@ -97,7 +97,13 @@ function type(data) {
 
 function check_delta(data) {
   if (data.stats.division.metadata.deltaUp) {
-    return `<div class="material-icons mdl-badge mdl-badge--overlap" style="color: #00ff00;" data-badge="${data.stats.division.metadata.deltaUp}">arrow_upward</div><div class="material-icons mdl-badge mdl-badge--overlap" style="color: red;" data-badge="${data.stats.division.metadata.deltaDown}">arrow_downward</div>`
+    if (data.stats.division.metadata.deltaDown) {
+      return `<div class="material-icons mdl-badge mdl-badge--overlap" style="color: #00ff00;" data-badge="${data.stats.division.metadata.deltaUp}">arrow_upward</div><div class="material-icons mdl-badge mdl-badge--overlap" style="color: red;" data-badge="${data.stats.division.metadata.deltaDown}">arrow_downward</div>`
+    } else {
+      return `<div class="material-icons mdl-badge mdl-badge--overlap" style="display: table; margin-left: auto; margin-right: auto; color: #00ff00;" data-badge="${data.stats.division.metadata.deltaUp}">arrow_upward</div>`
+    }
+  } else if (data.stats.division.metadata.deltaDown) {
+    return `<div class="material-icons mdl-badge mdl-badge--overlap" style="display: table; margin-left: auto; margin-right: auto; color: red;" data-badge="${data.stats.division.metadata.deltaDown}">arrow_downward</div>`
   } else {
     return ``;
   }
