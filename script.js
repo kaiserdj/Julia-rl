@@ -36,13 +36,13 @@ $(document).on("click","#egg", function (event) {
             $('.reward img').attr("src",data.data.segments[0].stats.seasonRewardLevel.metadata.iconUrl)
             $('.reward h2').text(data.data.segments[0].stats.seasonRewardLevel.metadata.rankName)
             //General stats
-            $("#stats").append(chip("/assets/Wins.png", `Wins: ${data.data.segments[0].stats.wins.displayValue}`))
-            $("#stats").append(chip("/assets/Mvps.png", `Mvps: ${data.data.segments[0].stats.mVPs.displayValue}`))
-            $("#stats").append(chip("/assets/Goals.png", `Goals: ${data.data.segments[0].stats.goals.displayValue}`))
-            $("#stats").append(chip("/assets/LongGoal.png", `Goal Shot Ratio: ${data.data.segments[0].stats.goalShotRatio.displayValue}`))
-            $("#stats").append(chip("/assets/Shots.png", `Shots: ${data.data.segments[0].stats.shots.displayValue}`))
-            $("#stats").append(chip("/assets/Assists.png", `Assists: ${data.data.segments[0].stats.assists.displayValue}`))
-            $("#stats").append(chip("/assets/Saves.png", `Saves: ${data.data.segments[0].stats.saves.displayValue}`))
+            $("#stats").append(chip("./assets/Wins.png", `Wins: ${data.data.segments[0].stats.wins.displayValue}`))
+            $("#stats").append(chip("./assets/Mvps.png", `Mvps: ${data.data.segments[0].stats.mVPs.displayValue}`))
+            $("#stats").append(chip("./assets/Goals.png", `Goals: ${data.data.segments[0].stats.goals.displayValue}`))
+            $("#stats").append(chip("./assets/LongGoal.png", `Goal Shot Ratio: ${data.data.segments[0].stats.goalShotRatio.displayValue}`))
+            $("#stats").append(chip("./assets/Shots.png", `Shots: ${data.data.segments[0].stats.shots.displayValue}`))
+            $("#stats").append(chip("./assets/Assists.png", `Assists: ${data.data.segments[0].stats.assists.displayValue}`))
+            $("#stats").append(chip("./assets/Saves.png", `Saves: ${data.data.segments[0].stats.saves.displayValue}`))
             //Profile url
             $('#profile').attr("href", `http://steamcommunity.com/profiles/${data.data.platformInfo.platformUserIdentifier}`)
             //Types
@@ -78,9 +78,9 @@ $(document).on("click","#egg", function (event) {
               <span class="type-card-image__filename">
                 <span id="${random}" class="mdl-badge" data-badge="${data.stats.division.displayValue}" style="color: black; font-weight: bold;">${data.stats.tier.metadata.name}</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="${random}">
-                  ${chip("/assets/Wins.png", "MMR: " + data.stats.rating.displayValue)}
-                  ${chip("/assets/MatchesPlayed.png", "Matches Played: " + data.stats.matchesPlayed.displayValue)}
-                  ${chip("/assets/WinStreak.png", "Win Streak: " + data.stats.winStreak.displayValue)}
+                  ${chip("./assets/Wins.png", "MMR: " + data.stats.rating.displayValue)}
+                  ${chip("./assets/MatchesPlayed.png", "Matches Played: " + data.stats.matchesPlayed.displayValue)}
+                  ${chip("./assets/WinStreak.png", "Win Streak: " + data.stats.winStreak.displayValue)}
                 </div>
               </span>
             </div>
