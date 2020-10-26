@@ -68,7 +68,6 @@ $(document).on("click","#egg", function (event) {
   }
 
   function type (data) {
-    console.log(data)
     let random = '_' + Math.random().toString(36).substr(2, 9);
     return `
     <div class="mdl-cell mdl-cell--3-col">
