@@ -68,6 +68,7 @@ $(document).on("click","#egg", function (event) {
   }
 
   function type (data) {
+    console.log(data)
     let random = '_' + Math.random().toString(36).substr(2, 9);
     return `
     <div class="mdl-cell mdl-cell--3-col">
@@ -78,6 +79,7 @@ $(document).on("click","#egg", function (event) {
               <span class="type-card-image__filename">
                 <span id="${random}" class="mdl-badge" data-badge="${data.stats.division.displayValue}" style="color: black; font-weight: bold;">${data.stats.tier.metadata.name}</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="${random}">
+                  ${check_delta(data)}
                   ${chip("./assets/Wins.png", "MMR: " + data.stats.rating.displayValue)}
                   ${chip("./assets/MatchesPlayed.png", "Matches Played: " + data.stats.matchesPlayed.displayValue)}
                   ${chip("./assets/WinStreak.png", "Win Streak: " + data.stats.winStreak.displayValue)}
@@ -86,6 +88,14 @@ $(document).on("click","#egg", function (event) {
             </div>
           </div>
         </div>`;
+  }
+
+  function check_delta (data) {
+    if(data.stats.division.metadata.deltaUp){
+      return `<div class="material-icons mdl-badge mdl-badge--overlap" style="color: #00ff00;" data-badge="${data.stats.division.metadata.deltaUp}">arrow_upward</div><div class="material-icons mdl-badge mdl-badge--overlap" style="color: red;" data-badge="${data.stats.division.metadata.deltaDown}">arrow_downward</div>`
+    }else{
+      return ``;
+    }
   }
 
   function egg() {
