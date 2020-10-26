@@ -20,7 +20,7 @@ $(document).on("click","#egg", function (event) {
 
   function profile (user) {
     $.ajax({
-        url: `https://cors-anywhere.herokuapp.com/api.tracker.gg/api/v2/rocket-league/standard/profile/steam/${user}`,
+        url: `https://api.tracker.gg/api/v2/rocket-league/standard/profile/steam/${user}`,
         type: 'get',
         headers: {
             "TRN-Api-Key": '6a766f6c-a530-4018-b2fd-be4583c42765'
