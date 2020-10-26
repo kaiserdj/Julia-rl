@@ -25,6 +25,10 @@ $(document).on("click","#egg", function (event) {
         headers: {
             "TRN-Api-Key": '6a766f6c-a530-4018-b2fd-be4583c42765'
         },
+        beforeSend: function() {
+          $("#result").hide();
+          $("#loading-image").show();
+        },
         dataType: 'json',
         success: function (data) {
             //Avatar
@@ -49,6 +53,8 @@ $(document).on("click","#egg", function (event) {
             for(let i=1;i<10;i++){
                 $("#types").append(type(data.data.segments[i]));
             }
+            $("#loading-image").hide();
+            $("#result").show();
             componentHandler.upgradeDom();            
         },
         error: function (xhr, ajaxOptions, thrownError) {
@@ -74,9 +80,9 @@ $(document).on("click","#egg", function (event) {
           <p class="type__title">${data.metadata.name}</p>
           <div class="type mdl-card mdl-shadow--2dp" style="background: url('${data.stats.tier.metadata.iconUrl}') center / cover !important;">
             <div class="mdl-card__title mdl-card--expand"></div>
-            <div class="mdl-card__actions">
+            <div id="${random}" class="mdl-card__actions">
               <span class="type-card-image__filename">
-                <span id="${random}" class="mdl-badge" data-badge="${data.stats.division.displayValue}" style="color: black; font-weight: bold;">${data.stats.tier.metadata.name}</span>
+                <span class="mdl-badge" data-badge="${data.stats.division.displayValue}" style="color: black; font-weight: bold;">${data.stats.tier.metadata.name}</span>
                 <div class="mdl-tooltip mdl-tooltip--large" for="${random}">
                   ${check_delta(data)}
                   ${chip("./assets/Wins.png", "MMR: " + data.stats.rating.displayValue)}
