@@ -1,3 +1,8 @@
+html {
+    min-height: 100%;
+    height: auto;
+}
+
 body {
     background: #fafafa;
     background-image: url("assets/background.jpg");
@@ -10,6 +15,10 @@ form {
     max-width: 500px;
     width: 100%;
     border-radius: 16px;
+}
+
+#loading-image {
+    max-width: 100%;
 }
 
 .mdl-cell {
