@@ -1,0 +1,95 @@
+body {
+    background: #fafafa;
+    background-image: url("assets/background.jpg");
+    background-position: center;
+}
+
+form {
+    display: inline-block;
+    background-color: rgba(255, 255, 255, 0.85);
+    padding: 0px 30px;
+    border-radius: 16px;
+}
+
+.mdl-cell {
+    text-align: center;
+}
+
+.mdl-card {
+    z-index: inherit !important;
+}
+
+.user {
+    background-color: rgba(255, 255, 255, 0.85) !important;
+    width: 100% !important;
+}
+
+.avatar.mdl-card {
+    background: url('') 100% / 100%;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.avatar img {
+    vertical-align: top;
+    width: 100%;
+    opacity: 0;
+}
+
+.avatar>.mdl-card__actions {
+    position: absolute;
+    bottom: 0px;
+    height: 52px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.4);
+}
+
+#avatar__username {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.reward {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.reward img {
+    width: 80px;
+}
+.reward h2 {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: bold;
+}
+
+#types {
+    background-color: rgba(255, 255, 255, 0.85);
+    border-radius: 2px;
+}
+
+.type {
+    width: 100% !important;
+}
+
+.type>.mdl-card__actions {
+    height: 52px;
+    padding: 16px;
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.type-card-image__filename {
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.type__title {
+    width: 100%;
+    font-weight: bold;
+}
