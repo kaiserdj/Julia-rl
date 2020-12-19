@@ -31,6 +31,7 @@ function profile(user) {
     },
     dataType: 'json',
     success: function (data) {
+      console.log(data)
       //Avatar
       $('.avatar').css("background-image", `url(${data.data.platformInfo.avatarUrl})`)
       $('#avatar__img').attr("src", data.data.platformInfo.avatarUrl)
@@ -50,7 +51,7 @@ function profile(user) {
       //Profile url
       $('#profile').attr("href", `http://steamcommunity.com/profiles/${data.data.platformInfo.platformUserIdentifier}`)
       //Types
-      for (let i = 1; i < 10; i++) {
+      for (let i = 1; i < data.data.segments.length; i++) {
         $("#types").append(type(data.data.segments[i]));
       }
       $("#loading-image").hide();
