@@ -19,50 +19,61 @@ $(document).on("click", "#egg", function(event) {
 });
 
 function profile(user) {
-    $.ajax({
-        url: `https://cors-anywhere.herokuapp.com/api.tracker.gg/api/v2/rocket-league/standard/profile/steam/${user}`,
-        type: 'get',
+    $("#result").hide();
+    $("#loading-image").show();
+
+    console.log("------loading------");
+    let cors = "https://co.kaiserdj-c.workers.dev/?";
+    let api = "https://api.tracker.gg/api/v2/rocket-league/standard/profile/steam/";
+
+    let requestOptions = {
+        method: 'GET',
         headers: {
             "TRN-Api-Key": '6a766f6c-a530-4018-b2fd-be4583c42765'
-        },
-        beforeSend: function() {
-            $("#result").hide();
-            $("#loading-image").show();
-        },
-        dataType: 'json',
-        success: function(data) {
-            console.log(data)
-            //Avatar
-            $('.avatar').css("background-image", `url(${data.data.platformInfo.avatarUrl})`)
-            $('#avatar__img').attr("src", data.data.platformInfo.avatarUrl)
-            //Username
-            $('#avatar__username').text(data.data.platformInfo.platformUserHandle)
-            //Reward
-            $('.reward img').attr("src", data.data.segments[0].stats.seasonRewardLevel.metadata.iconUrl)
-            $('.reward h2').text(data.data.segments[0].stats.seasonRewardLevel.metadata.rankName)
-            //General stats
-            $("#stats").append(chip("./assets/Wins.png", `Wins: ${data.data.segments[0].stats.wins.displayValue}`))
-            $("#stats").append(chip("./assets/Mvps.png", `Mvps: ${data.data.segments[0].stats.mVPs.displayValue}`))
-            $("#stats").append(chip("./assets/Goals.png", `Goals: ${data.data.segments[0].stats.goals.displayValue}`))
-            $("#stats").append(chip("./assets/LongGoal.png", `Goal Shot Ratio: ${data.data.segments[0].stats.goalShotRatio.displayValue}`))
-            $("#stats").append(chip("./assets/Shots.png", `Shots: ${data.data.segments[0].stats.shots.displayValue}`))
-            $("#stats").append(chip("./assets/Assists.png", `Assists: ${data.data.segments[0].stats.assists.displayValue}`))
-            $("#stats").append(chip("./assets/Saves.png", `Saves: ${data.data.segments[0].stats.saves.displayValue}`))
-            //Profile url
-            $('#profile').attr("href", `http://steamcommunity.com/profiles/${data.data.platformInfo.platformUserIdentifier}`)
-            //Types
-            for (let i = 1; i < data.data.segments.length; i++) {
-                $("#types").append(type(data.data.segments[i]));
-            }
-            $("#loading-image").hide();
-            $("#result").show();
-            componentHandler.upgradeDom();
-        },
-        error: function(xhr, ajaxOptions, thrownError) {
-            alert(thrownError);
-            profile("76561198003904647");
         }
-    });
+    };
+
+    fetch(`${cors}${api}${user}`, requestOptions)
+        .then(response => response.text())
+        .then(data => {
+            if (JSON.parse(data)) {
+                data = JSON.parse(data);
+                console.log("json answer: ");
+                console.log(data)
+                //Error
+                if (data.errors){
+                  alert(data.errors[0].message);
+                  return profile("76561198003904647");
+                }
+                //Avatar
+                $('.avatar').css("background-image", `url(${data.data.platformInfo.avatarUrl})`)
+                $('#avatar__img').attr("src", data.data.platformInfo.avatarUrl)
+                //Username
+                $('#avatar__username').text(data.data.platformInfo.platformUserHandle)
+                console.log(`User: ${data.data.platformInfo.platformUserHandle}`);
+                //Reward
+                $('.reward img').attr("src", data.data.segments[0].stats.seasonRewardLevel.metadata.iconUrl)
+                $('.reward h2').text(data.data.segments[0].stats.seasonRewardLevel.metadata.rankName)
+                //General stats
+                $("#stats").append(chip("./assets/Wins.png", `Wins: ${data.data.segments[0].stats.wins.displayValue}`))
+                $("#stats").append(chip("./assets/Mvps.png", `Mvps: ${data.data.segments[0].stats.mVPs.displayValue}`))
+                $("#stats").append(chip("./assets/Goals.png", `Goals: ${data.data.segments[0].stats.goals.displayValue}`))
+                $("#stats").append(chip("./assets/LongGoal.png", `Goal Shot Ratio: ${data.data.segments[0].stats.goalShotRatio.displayValue}`))
+                $("#stats").append(chip("./assets/Shots.png", `Shots: ${data.data.segments[0].stats.shots.displayValue}`))
+                $("#stats").append(chip("./assets/Assists.png", `Assists: ${data.data.segments[0].stats.assists.displayValue}`))
+                $("#stats").append(chip("./assets/Saves.png", `Saves: ${data.data.segments[0].stats.saves.displayValue}`))
+                //Profile url
+                $('#profile').attr("href", `http://steamcommunity.com/profiles/${data.data.platformInfo.platformUserIdentifier}`)
+                //Types
+                for (let i = 1; i < data.data.segments.length; i++) {
+                    $("#types").append(type(data.data.segments[i]));
+                }
+                $("#loading-image").hide();
+                $("#result").show();
+                componentHandler.upgradeDom();
+            }
+        })
+        .catch(err => error(err));
 }
 
 function chip(img, data) {
@@ -108,6 +119,16 @@ function check_delta(data) {
     } else {
         return ``;
     }
+}
+
+function error(data) {
+    console.error("---------------------------");
+    console.error("-          ERROR          -");
+    console.error("---------------------------");
+    console.error(data);
+    console.error(data.responseText);
+    alert(thrownError);
+    profile("76561198003904647");
 }
 
 function egg() {
